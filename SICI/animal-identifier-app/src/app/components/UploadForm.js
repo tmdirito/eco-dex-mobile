@@ -6,6 +6,7 @@ import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { storage, firestore } from '../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
 import styles from '../page.module.css';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 export default function UploadForm() {
   const [file, setFile] = useState(null);
@@ -51,16 +52,16 @@ export default function UploadForm() {
     return () => unsubscribe();
   }, [currentUser, isProcessing, lastAnimalId]);
 
-  const handleFileChange = (e) => {
-    if (e.target.files.length > 0) {
-      const selectedFile = e.target.files[0];
-      setFile(selectedFile);
-      const previewURL = URL.createObjectURL(selectedFile);
-      setImagePreview(previewURL);
-      setError('');
-      setUploadMessage(`Selected: ${selectedFile.name}. Ready to identify.`);
-    }
-  };
+  const takePicture = async () => {
+  const image = await Camera.getPhoto({
+    quality: 90,
+    allowEditing: true,
+    resultType: CameraResultType.Uri
+  });
+  
+  // You would then need to fetch the blob from image.webPath 
+  // to pass it to your existing Firebase uploadBytes logic.
+};
   
   // --- 2. Form Submission (Starts the Upload/AI Process) ---
   const handleSubmit = async (e) => {
