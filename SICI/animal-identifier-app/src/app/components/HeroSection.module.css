@@ -1,13 +1,16 @@
 .heroSection {
     position: relative;
-    height: 70vh; /* Normal website hero height */
+    height: 70vh;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     text-align: center;
-  }
+    background-color: #051a10; /* <--- NEW: Dark green fallback color */
+}
+
+/* ... rest of css ... */
   
   /* 🎥 Bright and detailed background video */
   .backgroundVideo {

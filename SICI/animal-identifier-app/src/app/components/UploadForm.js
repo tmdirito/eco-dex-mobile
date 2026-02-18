@@ -52,6 +52,18 @@ export default function UploadForm() {
     return () => unsubscribe();
   }, [currentUser, isProcessing, lastAnimalId]);
 
+
+  // --- MISSING FUNCTION: Handles standard file selection ---
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      // Create a preview to show the user what they picked
+      setImagePreview(URL.createObjectURL(selectedFile));
+      setUploadMessage("File selected. Ready to identify.");
+    }
+  };
+
   const takePicture = async () => {
   const image = await Camera.getPhoto({
     quality: 90,

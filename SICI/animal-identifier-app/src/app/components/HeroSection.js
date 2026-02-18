@@ -18,19 +18,20 @@ export default function HeroSection() {
 
   return (
     <section className={styles.heroSection}>
-      {/* Only render the video tag if a video source is selected */}
+      {/* ADDED: Background fallback if video fails */}
+      <div className={styles.heroBgFallback}></div> 
+
       {video && (
         <video
-          key={video} // Forces React to re-render the element when source changes
+          key={video}
           autoPlay
           loop
           muted
           playsInline
           className={styles.backgroundVideo}
+          poster="/images/hero-poster.jpg" // <--- CRITICAL: Add a static image here
         >
-          {/* Move src directly to the source tag, or use src on video tag */}
           <source src={video} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
       )}
 
