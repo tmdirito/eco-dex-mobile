@@ -1,17 +1,27 @@
-import { Providers } from './providers'; // Import the new wrapper component
-import './globals.css';
+// --- ADD THIS MISSING IMPORT ---
+import { AuthProvider } from '../context/AuthContext'; 
+
+import BottomNav from './components/BottomNav';
+import './globals.css'; // (Keep whatever global CSS imports you already had here)
 
 export const metadata = {
-  title: 'Animal Identifier',
-  description: 'Identify animals from images',
+  title: 'EcoDex',
+  description: 'Identify animals and plants with AI',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* Use the new <Providers> component to wrap your children */}
-        <Providers>{children}</Providers>
+        <AuthProvider>
+          {/* Wrapper with bottom padding so content isn't hidden behind the bar */}
+          <div style={{ paddingBottom: '80px' }}>
+            {children}
+          </div>
+          
+          {/* The new Bottom Navigation */}
+          <BottomNav />
+        </AuthProvider>
       </body>
     </html>
   );

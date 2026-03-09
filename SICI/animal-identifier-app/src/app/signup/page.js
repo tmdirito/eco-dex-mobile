@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { app } from '../lib/firebase';
 import { createFirestoreUser } from '../lib/firestore-service';
 import styles from '../page.module.css';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 
 export default function SignUpPage() {
   const [email, setEmail] = useState('');
@@ -46,7 +46,7 @@ export default function SignUpPage() {
   
   return (
     <>
-    <Header/>
+    
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className={styles.title}>Create an Account</h1>

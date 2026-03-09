@@ -1,30 +1,29 @@
-import Link from "next/link";
-import styles from "./home.module.css";
-import NavBar from "./components/NavBar";
-import Image from "next/image";
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import StepsSection from "./components/StepsSection";
-import FeaturesSection from "./components/FeaturesSection";
-import AboutMission from "./components/AboutMission";
-import HabitatMap from "./components/HabitatMap";
-export default function HomePage() {
-  return (
-    <div className={styles.container}>
-      <Header />
-      <main className={styles.main}>
-        {/* Hero Section */}
-        <HeroSection />
-        <StepsSection/>
-        <FeaturesSection/>
-        <AboutMission/>
-        <HabitatMap/> 
-        
-      </main>
+'use client';
 
-      <footer className={styles.footer}>
-        <p>&copy; 2025 Animal Identifier. All rights reserved.</p>
-      </footer>
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
+
+export default function RootPage() {
+  const { currentUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Wait for the auth state to initialize
+    if (currentUser === undefined) return; 
+
+    // Redirect based on auth status
+    if (currentUser) {
+      router.push('/dashboard'); // Go to identify screen
+    } else {
+      router.push('/login'); // Force login
+    }
+  }, [currentUser, router]);
+
+  // A simple loading screen while the app checks Firebase Auth
+  return (
+    <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#051a10', color: '#00ff88' }}>
+      <h2>Loading EcoDex...</h2>
     </div>
   );
 }

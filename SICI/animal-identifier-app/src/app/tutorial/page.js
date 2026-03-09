@@ -2,7 +2,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import styles from "./tutorial.module.css";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import VineShape from "./VineShape";
 
 export default function TutorialPage() {
@@ -51,7 +51,7 @@ export default function TutorialPage() {
 
   return (
     <>
-      <Header />
+      
       <div className={styles.page}>
         <main className={styles.main}>
           <h1 className={styles.title}>How to Use EcoDex</h1>

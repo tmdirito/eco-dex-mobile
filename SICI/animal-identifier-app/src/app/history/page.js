@@ -6,7 +6,7 @@ import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { firestore } from '../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
 import styles from '../page.module.css';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import {doc, deleteDoc } from 'firebase/firestore';
 export default function HistoryPage() {
   const { currentUser } = useAuth();
@@ -71,7 +71,7 @@ export default function HistoryPage() {
 
   return (
     <>
-    <Header />
+    
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className={styles.title}>Your Identification History</h1>

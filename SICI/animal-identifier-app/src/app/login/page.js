@@ -15,7 +15,7 @@ import { app } from '../lib/firebase';
 import { createFirestoreUser } from '../lib/firestore-service';
 import styles from '../page.module.css';
 import loginStyles from './login.module.css';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -87,7 +87,7 @@ export default function LoginPage() {
 
   return (
     <>
-    <Header />
+    
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome Back</h1>
