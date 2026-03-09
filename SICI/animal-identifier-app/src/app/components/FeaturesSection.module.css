@@ -1,131 +1,43 @@
-.featuresSection {
-    /* CHANGED: Reduced padding for mobile default */
-    padding: 4rem 1.5rem; 
-    max-width: 1200px;
-    margin: auto;
-    position: relative;
-    overflow: hidden; /* Prevents horizontal scroll bars */
-  }
-  
-  .heading {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4rem; /* Reduced slightly */
-  }
-  
-  .featuresWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem; /* Reduced gap for mobile */
-    width: 100%;
-    align-items: center; /* Centers items */
-  }
-  
-  /* Feature card */
-  .featureCard {
-    display: flex;
-    align-items: center;
-    /* CHANGED: Width is now responsive, maxing out at 700px */
-    width: 100%; 
-    max-width: 700px;
-    position: relative;
-    min-height: 150px;
-  }
-  
-  /* IMAGE STYLES */
-  .imageWrapper {
-    position: absolute;
-    left: 0;
-    width: 200px;
-    height: 200px;
-    transform: translateX(50vw); 
-    transition: transform 1.5s ease;
-    z-index: 2;
-    /* CHANGED: Flex centering for mobile alignment */
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .moveLeft {
-    transform: translateX(0);
-  }
-  
-  .featureImage {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    border: 3px solid rgba(255,255,255,0.3);
-    transition: transform 0.5s ease;
-    z-index: 1;
-    background: #000; /* Fallback if image missing */
-  }
-  
-  /* TEXT STYLES */
-  .text {
-    max-width: 500px;
-    opacity: 0;
-    transform: translateY(0);
-    text-align: left;
-    margin-left: 220px; /* Keeps space for image on desktop */
-    transition: opacity 0.8s ease 0s;
-  }
-  
-  .showText {
-    opacity: 1;
-  }
-  
-  .text h3 {
-    font-size: 1.5rem; /* Slightly smaller for mobile safety */
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  
-  .text p {
-    font-size: 1rem;
-    color: #ddd;
-    line-height: 1.6;
-  }
-  
-  /* --- RESPONSIVE MOBILE VIEW --- */
-  @media(max-width: 768px) {
-    .featuresSection {
-       padding: 3rem 1rem; /* Small padding on edges */
-    }
+.section {
+  padding: 1rem 1.5rem 2rem;
+}
 
-    .featureCard {
-      flex-direction: column; 
-      text-align: center; 
-      min-height: auto;
-      gap: 1rem; /* Space between image and text */
-    }
-  
-    .imageWrapper {
-      position: relative; /* Stop being absolute on mobile */
-      left: auto;
-      width: 100%;
-      height: auto;
-      transform: none !important; /* Disable sliding animation on mobile to prevent glitching */
-      margin-bottom: 0.5rem;
-    }
-  
-    .moveLeft {
-        transform: none;
-    }
+.heading {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
 
-    .featureImage {
-        width: 140px; /* Slightly larger on mobile for focus */
-        height: 140px;
-    }
-  
-    .text {
-      margin-left: 0; /* Remove the desktop margin */
-      text-align: center; 
-      opacity: 1; /* Make text always visible on mobile if animation fails */
-      padding: 0 1rem;
-    }
-  }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.featureCard {
+  background: #0d2a17;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.iconPlaceholder {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.featureCard h3 {
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.featureCard p {
+  color: #b3d4c0;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}

@@ -1,95 +1,47 @@
-.stepsSection {
-    padding: 5rem 1rem;
-    position: relative;
-    max-width: 900px;
-    margin: auto;
-  }
-  
-  .heading {
-    text-align: center;
-    margin-bottom: 7rem;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
-  }
-  
-  .stepsWrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .lineSegment {
-    position: absolute;
-    left: 1.5rem; /* center of circle */
-    width: 3px;
-    height: 0;
-    background: linear-gradient(to bottom, #fefefe, #ffffff);
-    border-radius: 3px;
-    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-  }
-  
-  .segmentVisible {
-    height: 100px; /* adjust based on spacing */
-  }
-  
-  .stepContainer {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5rem;
-    position: relative;
-  }
-  
-  .circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #00ff88;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  
-  .showCircle {
-    opacity: 1;
-    transform: scale(1);
-  }
-  
-  .text {
-    margin-left: 4rem;
-    opacity: 0;
-    transform: translateX(-60px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 700px;
-   
-  }
-  
-  .showText {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .text h3 {
-    margin: 0 0 0.7rem 0;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color:#ffffff;
-  }
-  
-  .text p {
-    margin: 0;
-    font-size: 1rem;
-    color:#ffffff;
-    line-height: 1.5;
-  }
+.section {
+  padding: 2rem 1.5rem;
+}
 
+.heading {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.card {
+  background: #0d2a17; /* Material Surface */
+  border-radius: 16px; /* Material Rounded Corners */
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Material Elevation */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.circle {
+  background: #00ff88;
+  color: #05150b;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.card h3 {
+  margin: 0 0 0.25rem 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 0;
+  color: #b3d4c0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
