@@ -15,6 +15,9 @@ import { app } from '../lib/firebase';
 import { createFirestoreUser } from '../lib/firestore-service';
 import styles from '../page.module.css';
 import loginStyles from './login.module.css';
+import { Capacitor } from '@capacitor/core';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { signInWithCredential } from 'firebase/auth';
 // import Header from '../components/Header';
 
 export default function LoginPage() {
@@ -74,13 +77,34 @@ export default function LoginPage() {
   // --- CHANGE 3: Switch to Redirect Method ---
   const handleGoogleLogin = async () => {
     setError('');
-    setLoading(true); // Show loading while we redirect
+    setLoading(true);
+    
     try {
-      // This will take the user away from the page to Google's login screen
-      await signInWithRedirect(auth, provider);
+      if (Capacitor.isNativePlatform()) {
+        // --- MOBILE ONLY: Use Native Android Google Account Picker ---
+        GoogleAuth.initialize({
+          clientId: 'PASTE_YOUR_WEB_CLIENT_ID_HERE',
+          scopes: ['profile', 'email'],
+          grantOfflineAccess: true,
+        });
+
+        // Trigger the native pop-up
+        const googleUser = await GoogleAuth.signIn();
+        
+        // Take the token from the Android system and hand it to Firebase
+        const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
+        const result = await signInWithCredential(auth, credential);
+        
+        await createFirestoreUser(result.user);
+        router.push('/dashboard');
+
+      } else {
+        // --- WEB ONLY: Use standard Firebase Web Redirect ---
+        await signInWithRedirect(auth, provider);
+      }
     } catch (err) {
-      console.error("Google sign-in trigger failed:", err);
-      setError("Failed to start Google sign in.");
+      console.error("Google sign-in failed:", err);
+      setError("Failed to sign in with Google.");
       setLoading(false);
     }
   };
