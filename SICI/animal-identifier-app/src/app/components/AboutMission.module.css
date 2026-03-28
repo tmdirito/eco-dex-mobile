@@ -2,12 +2,22 @@
   padding: 2rem 1.5rem 4rem;
 }
 
-.card {
-  background: rgba(0, 255, 136, 0.1); /* Slight neon tint */
-  border: 1px solid rgba(0, 255, 136, 0.3);
+.card, .featureCard {
+  background: var(--card-bg);
   border-radius: 16px;
-  padding: 2rem 1.5rem;
-  text-align: center;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card h3, .featureCard h3, .heading {
+  color: var(--text-primary);
+}
+
+.card p, .featureCard p, .text {
+  color: var(--text-secondary);
 }
 
 .heading {

@@ -13,10 +13,10 @@
   width: 100%;
   max-width: 560px;
   padding: 32px 40px;
-  background: rgba(253, 253, 253, 0.95); /* Replaced flat white */
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: var(--card-bg); /* <-- Changed to variable */
+  border: 1px solid var(--card-border); /* <-- Changed to variable */
   border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -71,19 +71,20 @@
 
 /* --- Glass effect for identified animal cards --- */
 .resultCard {
-  background: rgba(253, 253, 253, 0.95); /* Replaced flat white */
+  background: var(--card-bg); /* <-- Changed to variable */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--card-border); /* <-- Changed to variable */
   border-radius: 12px;
   padding: 16px;
   margin-top: 16px;
   text-align: left;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04); 
+  box-shadow: 0 6px 18px var(--shadow-color); 
 }
 
+/* Also make sure headings inside cards change color properly */
 .resultCard h3 {
-  color: #6c8954;
+  color: var(--accent-color);
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
 }

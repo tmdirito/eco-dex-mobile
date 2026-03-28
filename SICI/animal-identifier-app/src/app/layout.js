@@ -1,8 +1,7 @@
-// --- ADD THIS MISSING IMPORT ---
 import { AuthProvider } from '../context/AuthContext'; 
-
+import { ThemeProvider } from '../context/ThemeContext'; // <-- NEW IMPORT
 import BottomNav from './components/BottomNav';
-import './globals.css'; // (Keep whatever global CSS imports you already had here)
+import './globals.css'; 
 
 export const metadata = {
   title: 'EcoDex',
@@ -13,15 +12,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          {/* Wrapper with bottom padding so content isn't hidden behind the bar */}
-          <div style={{ paddingBottom: '80px' }}>
-            {children}
-          </div>
-          
-          {/* The new Bottom Navigation */}
-          <BottomNav />
-        </AuthProvider>
+        <ThemeProvider> {/* <-- ADDED */}
+          <AuthProvider>
+            <div style={{ paddingBottom: '80px' }}>
+              {children}
+            </div>
+            <BottomNav />
+          </AuthProvider>
+        </ThemeProvider> {/* <-- ADDED */}
       </body>
     </html>
   );

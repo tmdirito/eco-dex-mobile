@@ -74,8 +74,8 @@ export default function HistoryPage() {
     
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1 className={styles.title}>Your Identification History</h1>
-        <p className={styles.description}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--accent-color)' }}>History</h1>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
           A log of all the animals/plants you've discovered.
         </p>
 
@@ -88,7 +88,7 @@ export default function HistoryPage() {
                 <h3>{animal.commonName}</h3>
                 <p><strong>Scientific Name:</strong> {animal.scientificName}</p>
                 <p><strong>Conservation Status:</strong> {animal.conservationStatus}</p>
-                <p style={{marginTop: '8px', color: '#000000'}}>{animal.description}</p>
+                <p style={{marginTop: '12px', color: 'var(--text-secondary)', lineHeight: '1.5'}}>{animal.description}</p>
                 <p style={{marginTop: '1rem', fontSize: '0.8rem', color: 'gray'}}>
                   <em>Identified on: {animal.createdAt}</em>
                 </p>

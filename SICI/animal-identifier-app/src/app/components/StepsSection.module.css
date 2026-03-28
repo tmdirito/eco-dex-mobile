@@ -9,16 +9,22 @@
   font-weight: 600;
 }
 
-.card {
-  background: #0d2a17; /* Material Surface */
-  border-radius: 16px; /* Material Rounded Corners */
+.card, .featureCard {
+  background: var(--card-bg);
+  border-radius: 16px;
   padding: 1.5rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Material Elevation */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card h3, .featureCard h3, .heading {
+  color: var(--text-primary);
+}
+
+.card p, .featureCard p, .text {
+  color: var(--text-secondary);
 }
 
 .circle {
@@ -33,15 +39,3 @@
   font-weight: bold;
 }
 
-.card h3 {
-  margin: 0 0 0.25rem 0;
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-.card p {
-  margin: 0;
-  color: #b3d4c0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}

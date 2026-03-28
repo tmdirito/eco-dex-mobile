@@ -3,14 +3,31 @@
 
 /* --- 2. Define the new color palette --- */
 :root {
-  --background: linear-gradient(135deg, #000000, #03240a);
-  --foreground: #ffffff; /* Changed to white for better contrast */
-  --card-bg: rgba(255, 255, 255, 0.1); /* Semi-transparent white for glass effect */
-  --card-border: rgba(255, 255, 255, 0.2); /* Softer border for glass effect */
-  --primary: #22c55e; /* A vibrant, modern green */
-  --primary-hover: #16a34a;
-  --secondary-text: #d1d5db; /* Light gray for secondary text */
+  --bg-color: #f0ead2;
+  --text-primary: #36452a;
+  --text-secondary: #555555;
+  --card-bg: rgba(253, 253, 253, 0.95);
+  --card-border: rgba(255, 255, 255, 0.6);
+  --accent-color: #6c8954;
+  --accent-text: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --danger-bg: rgba(239, 68, 68, 0.05);
+  --danger-text: #ef4444;
+  --danger-border: rgba(239, 68, 68, 0.3);
+}
 
+[data-theme='dark'] {
+  --bg-color: #05150b;
+  --text-primary: #ffffff;
+  --text-secondary: #b3d4c0;
+  --card-bg: #0d2a17;
+  --card-border: rgba(255, 255, 255, 0.05);
+  --accent-color: #00ff88;
+  --accent-text: #05150b;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --danger-bg: rgba(255, 76, 76, 0.1);
+  --danger-text: #ff4c4c;
+  --danger-border: rgba(255, 76, 76, 0.3);
 }
 
 * {
@@ -27,12 +44,13 @@ body {
 
 /* --- 3. Apply the new font and colors --- */
 body {
-  background-color: #f0ead2; /* Your pastel beige */
-  color: #000000;
-  margin: 0;
-  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade when toggling */
 }
 
 a {

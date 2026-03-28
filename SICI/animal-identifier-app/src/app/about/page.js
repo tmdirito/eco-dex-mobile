@@ -6,7 +6,7 @@ import AboutMission from "../components/AboutMission";
 
 export default function AboutPage() {
   return (
-    <div style={{ backgroundColor: '#05150b', minHeight: '100vh', paddingBottom: '2rem' }}>
+    <div style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh', paddingBottom: '2rem', transition: 'background-color 0.3s ease' }}>
       <main style={{ paddingTop: '80px' }}> {/* Space for the fixed header */}
         <HeroSection />
         <StepsSection />

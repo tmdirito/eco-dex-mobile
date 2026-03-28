@@ -4,48 +4,55 @@
   left: 0;
   width: 100%;
   height: 70px;
-  background-color: rgba(12, 40, 22, 0.95);
+  /* 1. Dynamic Background and Border */
+  background-color: var(--card-bg); 
+  border-top: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
-  /* padding-bottom adds extra space for modern iPhone swipe bars */
   padding-bottom: env(safe-area-inset-bottom); 
+  /* 2. Smooth transition when toggling themes */
+  transition: background-color 0.3s ease, border-color 0.3s ease; 
 }
 
 .navItem {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #666; /* Unselected color */
+  /* 3. Dynamic Unselected Color (Grey/Soft Green) */
+  color: var(--text-secondary); 
   flex: 1;
   transition: color 0.2s;
 }
 
 .navItem.active {
-  color: #00ff88; /* Selected color */
+  /* 4. Dynamic Selected Color (Pastel Green/Neon Green) */
+  color: var(--accent-color); 
 }
 
-/* Make the Identify button larger and pop out */
 .primaryAction {
   flex: 1.2; 
 }
 
 .primaryAction .iconWrapper {
-  background: #00ff88;
-  color: #000;
+  /* 5. Dynamic Popped-out Button Colors */
+  background: var(--accent-color); 
+  color: var(--accent-text); 
   border-radius: 50%;
   width: 55px;
   height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-15px); /* Pop up out of the bar */
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+  transform: translateY(-15px); 
+  /* 6. Dynamic Shadow */
+  box-shadow: 0 4px 15px var(--shadow-color); 
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .primaryAction.active .iconWrapper {
-  background: #00cc66; /* Slightly darker when active */
+  /* 7. Pro Tip: Use brightness instead of a hardcoded hex to darken the active state dynamically! */
+  filter: brightness(0.9); 
 }

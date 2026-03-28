@@ -109,8 +109,8 @@ export default function UploadForm() {
   // --- 5. Render Logic ---
   return (
     <div>
-      <h2 className={styles.title}>Identify a New Animal/Plant</h2>
-      <p className={styles.description} style={{ marginBottom: '1.5rem' }}>{uploadMessage}</p>
+      <h2 style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--accent-color)'}}>Identify Species</h2>
+<p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>{uploadMessage}</p>
       
       <form onSubmit={handleSubmit} className={styles.form}>
         
@@ -176,7 +176,7 @@ export default function UploadForm() {
           <h3>{animal.commonName}</h3>
           <p><strong>Scientific Name:</strong> {animal.scientificName}</p>
           <p><strong>Conservation Status:</strong> {animal.conservationStatus}</p>
-          <p style={{marginTop: '8px', color: '#000000'}}>{animal.description}</p>
+          <p style={{marginTop: '12px', color: 'var(--text-secondary)', lineHeight: '1.5'}}>{animal.description}</p>
           <p style={{marginTop: '1rem', fontSize: '0.8rem', color: 'gray'}}>
             <em>Identified on: {animal.createdAt ? animal.createdAt.toDate().toLocaleString() : 'Date not available'}</em>
           </p>
