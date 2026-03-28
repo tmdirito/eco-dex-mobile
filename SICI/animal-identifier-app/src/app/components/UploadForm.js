@@ -176,7 +176,7 @@ export default function UploadForm() {
           <h3>{animal.commonName}</h3>
           <p><strong>Scientific Name:</strong> {animal.scientificName}</p>
           <p><strong>Conservation Status:</strong> {animal.conservationStatus}</p>
-          <p style={{marginTop: '8px', color: 'var(--secondary-text)'}}>{animal.description}</p>
+          <p style={{marginTop: '8px', color: '#000000'}}>{animal.description}</p>
           <p style={{marginTop: '1rem', fontSize: '0.8rem', color: 'gray'}}>
             <em>Identified on: {animal.createdAt ? animal.createdAt.toDate().toLocaleString() : 'Date not available'}</em>
           </p>
