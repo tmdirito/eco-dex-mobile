@@ -4,7 +4,6 @@
   left: 0;
   width: 100%;
   height: 70px;
-  /* 1. Dynamic Background and Border */
   background-color: var(--card-bg); 
   border-top: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
@@ -13,7 +12,6 @@
   align-items: center;
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom); 
-  /* 2. Smooth transition when toggling themes */
   transition: background-color 0.3s ease, border-color 0.3s ease; 
 }
 
@@ -21,23 +19,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 3. Dynamic Unselected Color (Grey/Soft Green) */
   color: var(--text-secondary); 
   flex: 1;
-  transition: color 0.2s;
+  /* 1. Removes the primitive "block" highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  /* 2. Adds a smooth, springy transition for color and size */
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 3. The smooth "Squish" effect when physically pressing the button */
+.navItem:active {
+  transform: scale(0.85); 
 }
 
 .navItem.active {
-  /* 4. Dynamic Selected Color (Pastel Green/Neon Green) */
   color: var(--accent-color); 
 }
 
 .primaryAction {
   flex: 1.2; 
+  /* Prevent the whole container from squishing, we only want the circle to squish */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent the active scale on the wrapper so the big button handles its own animation */
+.primaryAction:active {
+  transform: none; 
 }
 
 .primaryAction .iconWrapper {
-  /* 5. Dynamic Popped-out Button Colors */
   background: var(--accent-color); 
   color: var(--accent-text); 
   border-radius: 50%;
@@ -47,12 +58,18 @@
   justify-content: center;
   align-items: center;
   transform: translateY(-15px); 
-  /* 6. Dynamic Shadow */
   box-shadow: 0 4px 15px var(--shadow-color); 
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* 4. Smooth out the big button's transitions */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+/* 5. Make the center button press "down" into the bar smoothly */
+.primaryAction:active .iconWrapper {
+  transform: translateY(-10px) scale(0.95);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  filter: brightness(0.9);
 }
 
 .primaryAction.active .iconWrapper {
-  /* 7. Pro Tip: Use brightness instead of a hardcoded hex to darken the active state dynamically! */
   filter: brightness(0.9); 
 }

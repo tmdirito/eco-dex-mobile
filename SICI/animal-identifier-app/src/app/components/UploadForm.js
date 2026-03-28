@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ref, uploadBytes } from 'firebase/storage';
+import { useState, useEffect, useRef } from 'react';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { storage, firestore } from '../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
@@ -9,7 +9,28 @@ import styles from '../page.module.css';
 
 // --- UPDATED IMPORT: Added CameraSource ---
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+function FirebaseImage({ path, altText }) {
+  const [url, setUrl] = useState(null);
 
+  useEffect(() => {
+    if (!path) return;
+    const fetchUrl = async () => {
+      try {
+        const downloadUrl = await getDownloadURL(ref(storage, path));
+        setUrl(downloadUrl);
+      } catch (error) {
+        console.warn("Could not load image:", path);
+      }
+    };
+    fetchUrl();
+  }, [path]);
+
+  // Show a loading box until Firebase hands us the secure link
+  if (!url) {
+    return <div className={styles.cardImage} style={{ backgroundColor: 'var(--card-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading image...</div>;
+  }
+  return <img src={url} alt={altText} className={styles.cardImage} />;
+}
 export default function UploadForm() {
   const [file, setFile] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false); 
@@ -20,7 +41,8 @@ export default function UploadForm() {
   const [lastAnimalId, setLastAnimalId] = useState(null); 
   const [uploadMessage, setUploadMessage] = useState("Upload a picture or open your camera to begin.");
 
-  // --- 1. Firestore Listener (Reads History in Real-Time) ---
+  const existingIdsRef = useRef(null);
+
   useEffect(() => {
     if (!currentUser) return; 
 
@@ -30,12 +52,27 @@ export default function UploadForm() {
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const animalsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setAnimals(animalsData);
 
+      // --- 3. THE SESSION FILTER LOGIC ---
+      // If this is the very first time the database loads on this page...
+      if (!existingIdsRef.current) {
+        // Record all existing IDs so we know what to hide
+        existingIdsRef.current = new Set(animalsData.map(a => a.id));
+      }
+
+      // Filter the data to ONLY include animals that were NOT in the initial snapshot
+      const sessionAnimals = animalsData.filter(animal => !existingIdsRef.current.has(animal.id));
+      
+      // Update the UI state with only the session animals
+      setAnimals(sessionAnimals);
+
+      // (Keep the processing logic reading from the master animalsData list to detect the exact moment a new item hits the database)
       if (isProcessing && animalsData.length > 0 && animalsData[0].id !== lastAnimalId) {
         setIsProcessing(false); 
         setLastAnimalId(animalsData[0].id); 
-        setUploadMessage("Analysis complete. Result added to history.");
+        setUploadMessage("Analysis complete. Result added to your history.");
+        setFile(null);
+        setImagePreview(null);
       } else if (animalsData.length > 0 && lastAnimalId === null) {
           setLastAnimalId(animalsData[0].id);
       }
@@ -173,6 +210,7 @@ export default function UploadForm() {
       {animals.length === 0 && <p>No species identified yet.</p>}
       {animals.map((animal) => (
         <div key={animal.id} className={styles.resultCard}>
+          {animal.imagePath && <FirebaseImage path={animal.imagePath} altText={animal.commonName} />}
           <h3>{animal.commonName}</h3>
           <p><strong>Scientific Name:</strong> {animal.scientificName}</p>
           <p><strong>Conservation Status:</strong> {animal.conservationStatus}</p>

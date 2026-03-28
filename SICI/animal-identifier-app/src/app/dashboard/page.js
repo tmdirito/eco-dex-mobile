@@ -35,9 +35,6 @@ export default function DashboardPage() {
       <main className={styles.main}>
         <div className={styles.header}>
           <span>Welcome, {currentUser.email}</span>
-          <button onClick={() => logout().then(() => router.push('/'))} className={styles.logoutButton}>
-            Logout
-          </button>
         </div>
         <UploadForm />    
       </main>

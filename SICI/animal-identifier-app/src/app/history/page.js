@@ -3,11 +3,35 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { firestore } from '../lib/firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { firestore, storage } from '../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
 import styles from '../page.module.css';
 // import Header from '../components/Header';
 import {doc, deleteDoc } from 'firebase/firestore';
+function FirebaseImage({ path, altText }) {
+  const [url, setUrl] = useState(null);
+
+  useEffect(() => {
+    if (!path) return;
+    const fetchUrl = async () => {
+      try {
+        const downloadUrl = await getDownloadURL(ref(storage, path));
+        setUrl(downloadUrl);
+      } catch (error) {
+        console.warn("Could not load image:", path);
+      }
+    };
+    fetchUrl();
+  }, [path]);
+
+  if (!url) {
+    return <div className={styles.cardImage} style={{ backgroundColor: 'var(--card-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading image...</div>;
+  }
+  return <img src={url} alt={altText} className={styles.cardImage} />;
+}
+
+
 export default function HistoryPage() {
   const { currentUser } = useAuth();
   const router = useRouter();
@@ -18,7 +42,11 @@ export default function HistoryPage() {
 
    const handleDelete = async (animalID) => {
       if (!currentUser) return; // Make sure user is still logged in
-
+        // 1. ADD THE CONFIRMATION POPUP
+        const confirmDelete = window.confirm("Are you sure you want to delete this discovery?");
+    
+    // 2. STOP IF THEY CLICK CANCEL
+        if (!confirmDelete) return;
         setIsDeleting(true); // Disable buttons
         try {
       const docRef = doc(firestore, 'users', currentUser.uid, 'animals', animalID);
@@ -85,6 +113,7 @@ export default function HistoryPage() {
           ) : (
             animals.map((animal) => (
               <div key={animal.id} className={styles.resultCard}>
+                {animal.imagePath && <FirebaseImage path={animal.imagePath} altText={animal.commonName} />}
                 <h3>{animal.commonName}</h3>
                 <p><strong>Scientific Name:</strong> {animal.scientificName}</p>
                 <p><strong>Conservation Status:</strong> {animal.conservationStatus}</p>
