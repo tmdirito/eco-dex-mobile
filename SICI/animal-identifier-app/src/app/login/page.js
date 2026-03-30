@@ -72,7 +72,7 @@ export default function LoginPage() {
       if (Capacitor.isNativePlatform()) {
         // --- MOBILE ONLY: Native Android Google Account Picker ---
         GoogleAuth.initialize({
-          clientId: 'PASTE_YOUR_WEB_CLIENT_ID_HERE', // <-- Don't forget your Client ID!
+          clientId: '463909464724-2vr3t4hdblkaj2q07one7a65neqdb719.apps.googleusercontent.com', // <-- Don't forget your Client ID!
           scopes: ['profile', 'email'],
           grantOfflineAccess: true,
         });
