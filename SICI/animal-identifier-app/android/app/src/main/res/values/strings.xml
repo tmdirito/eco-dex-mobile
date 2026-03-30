@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Eco-Dex</string>
-    <string name="title_activity_main">Eco-Dex</string>
-    <string name="package_name">com.ecodex.app</string>
-    <string name="custom_url_scheme">com.ecodex.app</string>
-    <string name="server_client_id">463909464724-2vr3t4hdblkaj2q07one7a65neqdb719.apps.googleusercontent.com</string>
-</resources>
